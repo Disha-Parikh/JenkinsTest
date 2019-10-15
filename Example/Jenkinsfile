@@ -5,11 +5,8 @@ pipeline {
       steps {
              sh '''
 		sudo apt-get install python3-pip
-		sudo apt-get -y install python-virtualenv
-		sudo apt-get install screen -y
-		virtualenv flask1
-		source flask1/bin/activate
-		nohup python /var/lib/jenkins/workspace/flask/routes.py &
+		pip3 install -r requirements.txt
+		python3 /var/lib/jenkins/workspace/myproject/Example/app.py
 		'''	 
             }
         }
@@ -17,10 +14,10 @@ pipeline {
 		steps{
 		sh '''
 		sonar-scanner \
-  -Dsonar.projectKey=jenkins_flask \
+  -Dsonar.projectKey=flaskjenkins \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=fef5f29d5350a7ca2c597205e53f0ccf9ff226bc
+  -Dsonar.login=3c839b584f07a95344533b64e01d0b89dcbba188
 '''
 	}
 	}
