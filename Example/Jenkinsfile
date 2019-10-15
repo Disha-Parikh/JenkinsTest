@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
              sh '''
-		sudo apt-get install python3-pip
+		sudo apt-get install -y python3-pip
 		pip3 install -r requirements.txt
 		python3 /var/lib/jenkins/workspace/myproject_pipeline/Example/app.py
 		'''	 
