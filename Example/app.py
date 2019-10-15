@@ -21,7 +21,7 @@ insert_record = 'insert into User1(id, name, email, status) VALUES(%s,%s,%s,%s)'
 # 	print("Exists!")
 # else:
 # 	db.create_all()
-conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=15432 password='einfochips'")
+conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=5432 password='einfochips'")
 cur=conn.cursor()
 	
 @app.route('/',methods=["GET","POST"])
