@@ -1,8 +1,8 @@
 import os
 import sys
 from sqlalchemy.exc import SQLAlchemyError
-sys.path.append(os.getcwd() + '/..')
-from Example.app import db
+#sys.path.append(os.getcwd() + '/..')
+from app import db
 
 class User(db.Model):
 	__table_args__ = {'extend_existing' : True}
