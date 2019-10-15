@@ -96,7 +96,7 @@ def delete(id):
 
 if __name__ == '__main__':
 	#app = create_app("config")
-	app.run(host='0.0.0.0',port=5001)
+	app.run(host='0.0.0.0',port=5002)
 	cur.execute(create_database)
 
 	
