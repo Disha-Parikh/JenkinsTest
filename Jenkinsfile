@@ -30,6 +30,10 @@ pipeline {
       		if (qualitygate.status != "OK") {
          		error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       		}
+      		else{
+
+      			echo "Done"
+      		}
       	}
 	}
 	}	
