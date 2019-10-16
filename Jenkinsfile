@@ -5,7 +5,7 @@ pipeline {
       steps {
              sh '''
 		pip3 install -r requirements.txt
-		nohup python3 /var/lib/jenkins/workspace/myproject_pipeline/Example/app.py &e
+		nohup python3 /var/lib/jenkins/workspace/myproject_pipeline/Example/app.py &
 		'''	 
             }
         }
@@ -27,7 +27,7 @@ pipeline {
               if (qg.status != 'OK') {
                   error "Pipeline aborted due to quality gate failure: ${qg.status}"
               }
-		}
+		}	
 		}	
     }
    }
