@@ -5,7 +5,7 @@ RUN apt-get install -y python3-dev python3-pip
 RUN apt-get install -y libffi6
 RUN apt-get install -y libffi-dev
 RUN apt-get install -y build-essential
-RUN pip install -r /var/lib/jenkins/workspace/myproject_pipeline/requirements.txt
+RUN pip install flask flask_sqlalchemy psycopg2-binary
 WORKDIR .
 COPY . .
 EXPOSE 5000
