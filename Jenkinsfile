@@ -23,6 +23,7 @@ pipeline {
 	stage('Deploy'){
 		steps{
 			sh '''
+			sudo touch hellooo.txt
 			docker build -t finalflask:2.0 .
 			docker push dishaparikh98/finalflask:2.0
 			'''
