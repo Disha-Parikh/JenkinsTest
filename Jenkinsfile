@@ -20,26 +20,14 @@ pipeline {
 		'''
 			}
 		}
-	stage ("SonarQube analysis") {
-   steps {
-      withSonarQubeEnv('Scan') {
-         sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
-      }
-      script{
-      		timeout(time: 180 , unit:'SECONDS'){
-      		qualitygate = waitForQualityGate()	
-      		if (qualitygate.status != "OK") {
-         		error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-      		}
-      		else{
-
-      			echo "Done"
-      		}
-      	}
-      	}
-	}
+	stage('Deploy'){
+		steps{
+			docker build -t finalflask:2.0 .
+			docker push dishaparikh98/finalflask:2.0
+		}
 	}
 		
   }
+	}
 }
 
