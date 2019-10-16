@@ -18,21 +18,15 @@ pipeline {
   		-Dsonar.host.url=http://localhost:9000 \
   		-Dsonar.login=3c839b584f07a95344533b64e01d0b89dcbba188
 		'''
-			}
-		}
-	stage ("SonarQube analysis") {
-   steps {
-      withSonarQubeEnv('SonarQube') {
-         sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
-      }
-      script{
+		  script{
       		qualitygate = waitForQualityGate()	
       		if (qualitygate.status != "OK") {
          		error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       		}
       	}
-	}
-	}	
+			}
+		}
+		
   }
 }
 
