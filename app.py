@@ -27,7 +27,7 @@ cur=conn.cursor()
 @app.route('/',methods=["GET","POST"])
 def home():
 	
-	return render_template('home.html',data="Hello World!!")
+	return render_template('home.html',data="Hello World!version 2!")
 	
 
 @app.route('/data',methods=["GET","POST"])
