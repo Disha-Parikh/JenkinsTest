@@ -22,8 +22,10 @@ pipeline {
 		}
 	stage('Deploy'){
 		steps{
+			sh '''
 			docker build -t finalflask:2.0 .
 			docker push dishaparikh98/finalflask:2.0
+			'''
 		}
 	}
 		
