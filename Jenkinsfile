@@ -25,8 +25,7 @@ pipeline {
       withSonarQubeEnv('SonarQube') {
          sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
       }
-
-      def qualitygate = waitForQualityGate()
+	 qualitygate = waitForQualityGate()
       if (qualitygate.status != "OK") {
          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       }
