@@ -27,14 +27,15 @@ insert_record = 'insert into User1(id, name, email, status) VALUES(%s,%s,%s,%s)'
 conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=5432 password='einfochips'")
 cur=conn.cursor()
 
-sys.path.append(os.getcwd() + '/Example/templates')
+
 dirpath = os.getcwd()
-print("pwd %s",dirpath)
+print("PATH????? %s",dirpath)
 
 
 @app.route('/',methods=["GET","POST"])
-
 def home():
+	#print("Inside!! %s",os.getcwd())
+	#os.chdir('/Example/templates')
 	
 	return render_template('home.html',data="Hello World!version 2!")
 	
