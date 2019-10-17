@@ -20,7 +20,7 @@ pipeline {
 		'''
 			}
 		}
-	stage('Deploy'){
+	/*stage('Deploy'){
 		steps{
 		sh '''
 			sudo docker build -t finalflask .
@@ -28,7 +28,7 @@ pipeline {
 			sudo docker push dishaparikh98/finalflask:2.0
 		'''
 		}
-	}
+	}*/
 		
   }
 }
