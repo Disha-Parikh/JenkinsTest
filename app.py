@@ -1,6 +1,9 @@
 from flask import Flask,render_template,request
 from flask_sqlalchemy import SQLAlchemy
-from Example.User.models import *
+import sys
+import os
+sys.path.append(os.getcwd() + '/Example/User')
+from models import *
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 import psycopg2
@@ -23,8 +26,14 @@ insert_record = 'insert into User1(id, name, email, status) VALUES(%s,%s,%s,%s)'
 # 	db.create_all()
 conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=5432 password='einfochips'")
 cur=conn.cursor()
-	
+
+sys.path.append(os.getcwd() + '/Example/templates')
+dirpath = os.getcwd()
+print("pwd %s",dirpath)
+
+
 @app.route('/',methods=["GET","POST"])
+
 def home():
 	
 	return render_template('home.html',data="Hello World!version 2!")
