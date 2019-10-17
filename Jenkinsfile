@@ -9,7 +9,7 @@ pipeline {
 		'''	 
             }
         }
-	stage('test'){
+	/*stage('test'){
 		steps{
 		sh '''
 		sonar-scanner \
@@ -19,7 +19,7 @@ pipeline {
   		-Dsonar.login=3c839b584f07a95344533b64e01d0b89dcbba188
 		'''
 			}
-		}
+		}*/
 	/*stage('Deploy'){
 		steps{
 		sh '''
