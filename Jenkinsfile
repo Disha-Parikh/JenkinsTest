@@ -23,7 +23,8 @@ pipeline {
 	stage('Deploy'){
 		steps{
 		sh '''
-			docker build -t finalflask .
+			docker-compose build
+			docker-compose up
 			docker tag finalflask dishaparikh98/finalflask:2.0
 			docker push dishaparikh98/finalflask:2.0
 		'''
