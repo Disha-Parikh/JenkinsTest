@@ -5,7 +5,7 @@ pipeline {
       steps {
              sh '''
 				pip3 install -r requirements.txt
-			nohup python3 /var/lib/jenkins/workspace/myproject_pipeline/Example/app.py &
+			nohup python3 /var/lib/jenkins/workspace/myproject_pipeline/app.py &
 		'''	 
             }
         }
