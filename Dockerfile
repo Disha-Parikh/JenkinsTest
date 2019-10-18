@@ -9,6 +9,6 @@ WORKDIR .
 COPY . .
 EXPOSE 5000
 EXPOSE 15432
-ENTRYPOINT ["python3","/var/lib/jenkins/workspace/myproject_pipeline/Example/app.py"]
+ENTRYPOINT ["python3","/var/lib/jenkins/workspace/myproject_pipeline/app.py"]
 
 
