@@ -8,7 +8,7 @@ RUN pip install flask flask_sqlalchemy psycopg2-binary
 WORKDIR .
 COPY . .
 EXPOSE 5002
-EXPOSE 15432
+EXPOSE 5432
 ENTRYPOINT ["python3","/var/lib/jenkins/workspace/myproject_pipeline/app.py"]
 
 
