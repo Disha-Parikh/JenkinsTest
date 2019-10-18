@@ -25,7 +25,7 @@ pipeline {
 		sh '''
 			docker build -t finalflask .
 			docker tag finalflask dishaparikh98/finalflask:3.0
-			docker login -u dishaparikh98 -p 707c4e9b-5b7a-4725-b80d-5299d0446c19
+			sudo docker login -u dishaparikh98 -p 707c4e9b-5b7a-4725-b80d-5299d0446c19
 			docker push dishaparikh98/finalflask:3.0
 			docker run -dp 5002:5000 finalflask:3.0
 					'''
