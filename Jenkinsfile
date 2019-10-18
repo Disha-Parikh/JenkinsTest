@@ -15,7 +15,7 @@ pipeline {
 		sonar-scanner \
   		-Dsonar.projectKey=flaskjenkins \
   		-Dsonar.sources=. \
-  		-Dsonar.host.url=http://localhost:9000 \
+  		-Dsonar.host.url=http://69f6bd5c.ngrok.io:9000 \
   		-Dsonar.login=3c839b584f07a95344533b64e01d0b89dcbba188
 		'''
 			}
