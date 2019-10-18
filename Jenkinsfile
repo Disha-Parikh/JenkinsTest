@@ -27,7 +27,8 @@ pipeline {
 			docker tag finalflask dishaparikh98/finalflask:3.0
 			docker login -u dishaparikh98 -p 707c4e9b-5b7a-4725-b80d-5299d0446c19
 			docker push dishaparikh98/finalflask:3.0
-		'''
+			docker run -dp 5002:5000 finalflask:3.0
+					'''
 		}
 	}
 	stage ("SonarQube analysis") {
@@ -36,7 +37,7 @@ pipeline {
            STAGE_NAME = "SonarQube analysis"
 		 // this is a PR build, run sonar analysis
               withSonarQubeEnv("Scan") {
-                 sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
+                 sh "nohup /opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner &"   
               }		
               }
            
