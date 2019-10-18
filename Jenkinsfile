@@ -42,7 +42,7 @@ pipeline {
            
         }
      }
-  }
+  
 
   stage ("SonarQube Gate Keeper"){
   	steps{
