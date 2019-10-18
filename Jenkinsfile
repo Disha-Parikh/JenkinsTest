@@ -36,7 +36,7 @@ pipeline {
            STAGE_NAME = "SonarQube analysis"
 		 // this is a PR build, run sonar analysis
               withSonarQubeEnv("Scan") {
-                 sh "./opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
+                 sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
               }		
               }
            
