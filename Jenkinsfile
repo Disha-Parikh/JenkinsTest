@@ -49,7 +49,7 @@ pipeline {
   			STAGE_NAME="SonarQube GateKeeper"
   			def qualitygate = waitForQualityGate()
   			if(qualitygate.status!="OK"){
-  				error "Pipeline aborted ${qualitygate.status}
+  				error "Pipeline aborted ${qualitygate.status}"
 
   		}
   	}
