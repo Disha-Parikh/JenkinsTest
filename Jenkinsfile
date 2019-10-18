@@ -30,16 +30,32 @@ pipeline {
 		'''
 		}
 	}
-	stage('Quality Gate'){
-		steps{
-		timeout(time: 300,unit:'SECONDS'){
-			waitForQualityGate abortPipeline: true
+	stage ("SonarQube analysis") {
+     steps {
+        script {
+           STAGE_NAME = "SonarQube analysis"
+		 // this is a PR build, run sonar analysis
+              withSonarQubeEnv("SonarGate") {
+                 sh "../../../sonar-scanner-2.9.0.670/bin/sonar-scanner"   
+              }
+           
+        }
+     }
+  }
 
-			
-		}
-	  }
-	}
+  stage ("SonarQube Gate Keeper"){
+  	steps{
+  		script{
+  			STAGE_NAME="SonarQube GateKeeper"
+  			def qualitygate = waitForQualityGate()
+  			if(qualitygate.status!="OK"){
+  				error "Pipeline aborted ${qualitygate.status}
+
+  		}
+  	}
+  }
 		
+  }
   }
 }
 
