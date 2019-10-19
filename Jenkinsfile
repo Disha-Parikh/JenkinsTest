@@ -21,17 +21,6 @@ pipeline {
 		'''
 			}
 		}
-	stage('Deploy'){
-		steps{
-		sh '''
-			docker build -t finalflask .
-			docker tag finalflask dishaparikh98/finalflask:3.0
-			docker login -u dishaparikh98 -p 707c4e9b-5b7a-4725-b80d-5299d0446c19
-			docker push dishaparikh98/finalflask:3.0
-			docker run -dp 5002:5002 dishaparikh98/finalflask:3.0
-					'''
-		}
-	}
 	stage ("SonarQube analysis") {
      steps {
         script {
@@ -53,12 +42,25 @@ pipeline {
   			def qualitygate = waitForQualityGate()
   			if(qualitygate.status!="OK"){
   				error "Pipeline aborted ${qualitygate.status}"
+  				waitForQualityGate abortPipeline: true
 
   		}
   	}
   }
 		
   }
+
+  stage('Deploy'){
+		steps{
+		sh '''
+			docker build -t finalflask .
+			docker tag finalflask dishaparikh98/finalflask:3.0
+			docker login -u dishaparikh98 -p 707c4e9b-5b7a-4725-b80d-5299d0446c19
+			docker push dishaparikh98/finalflask:3.0
+			docker run -dp 5002:5002 dishaparikh98/finalflask:3.0
+					'''
+		}
+	}
   }
 }
 
