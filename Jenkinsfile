@@ -13,7 +13,7 @@ node{
 	}
 
 	stage('docker build/push'){
-		docker.withRegistry('https://cloud.docker.com/','Docker'){
+		docker.withRegistry('https://index.docker.io/v1/','Docker'){
 		def app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
 }
 
