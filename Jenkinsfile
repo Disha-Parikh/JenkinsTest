@@ -14,7 +14,7 @@ node{
 
         stage('sonar-scanner')
         {
-       		 def sonarqubeScannerHome = tool name: 'Scan', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+       		 def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 	         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')])
        		 {         
 
