@@ -33,7 +33,7 @@ node{
          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       }
       else{
-        sh "PASSED"
+        sh "echo PASSED"
       }
    
 }
