@@ -16,9 +16,10 @@ node{
         {
        		 def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 	         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')])
-       		 {
+       		 {         
+                  echo ${sonarLogin}
 	                	sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=jenkins -D sonar.sources=. "
-                    echo ${sonarLogin}
+
         }
     }
 
