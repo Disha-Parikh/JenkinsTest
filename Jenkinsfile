@@ -11,4 +11,11 @@ node{
 			
 		'''	 
 	}
+
+	stage('docker build/push'){
+		docker.withRegistry('https://cloud.docker.com/','Docker'){
+		def app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
+}
+
+	}
 }
