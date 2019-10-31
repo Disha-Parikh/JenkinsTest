@@ -20,29 +20,27 @@ node{
 
 	                	sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
            }
-           
-           withSonarQubeEnv('Scan') {
-              //sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
-            }
-          
-            
-
-          def qualitygate = waitForQualityGate()
-          //timeout(time: 5, unit: 'MINUTES')
-          if (qualitygate.status != "OK") {
-            error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-          }
-          else{
-            sh "echo PASSED"
-          }
 
   }
 
 
+  stage ("SonarQube analysis") {
+   steps {
+      withSonarQubeEnv('SonarQube') {
+         sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
+      }
+
+      def qualitygate = waitForQualityGate()
+      if (qualitygate.status != "OK") {
+         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+      }
+   }
+}
+
 	stage('docker build/push'){
 		docker.withRegistry('https://index.docker.io/v1/','Docker'){
 		def app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
-}
+    }
 
 	}
 }
