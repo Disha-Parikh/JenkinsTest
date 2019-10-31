@@ -28,14 +28,14 @@ node{
             
 
           def qualitygate = waitForQualityGate()
-          timeout(time: 5, unit: 'MINUTES'){
+          //timeout(time: 5, unit: 'MINUTES')
           if (qualitygate.status != "OK") {
             error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
           }
           else{
             sh "echo PASSED"
           }
-        }
+
   }
 
 
