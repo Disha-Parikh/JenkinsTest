@@ -26,7 +26,10 @@ node{
          //sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
           sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
 
-           def qualitygate = waitForQualityGate()
+           
+   
+      }
+      def qualitygate = waitForQualityGate()
       if (qualitygate.status != "OK") {
          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       }
@@ -34,7 +37,10 @@ node{
       else{
         out.info(this,"Scanning done")
       }
-   
+
+      timeout(time:5, unit: 'MINUTES')
+      {
+        waitForQualityGate abortPipeline:true
       }
 
      
