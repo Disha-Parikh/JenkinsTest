@@ -15,18 +15,21 @@ node{
   stage('Sonarqube Stage')
   {
        		 def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-	         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) && withSonarQubeEnv('Scan')
-       		 {         
+	         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')])  
+       		 {    
+                  withSonarQubeEnv('Scan' ){     
 
 	                	sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
                     def qualitygate = waitForQualityGate()
                     if (qualitygate.status != "OK") {
-         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-      }
+                          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                    }
 
-      else{
-        out.info(this,"Scanning done")
-      }
+                    else{
+                         out.info(this,"Scanning done")
+                    }
+
+                  }
 
 
            }
