@@ -20,7 +20,7 @@ node{
           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
         }
   
-       withSonarQubeEnv('sonar') {
+       withSonarQubeEnv('Scan') {
      }
     
   timeout(time: 1, unit: 'MINUTES') {
