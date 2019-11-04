@@ -12,44 +12,29 @@ node{
 		'''	 
 	}
 
-  stage('Sonarqube Stage')
+  stage('sonar-scanner') 
   {
-       		 //def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-	         /*withCredentials()
-
-	                	sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
-           }*/
-      def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
- withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')])      {
-      withSonarQubeEnv('Scan') {
+        def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) 
+        {
+          sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
+        }
+  
+       withSonarQubeEnv('sonar') {
+     }
+    
+  timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
         
-         sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"
-          sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
-
-           
-   
-      }
-      def qualitygate = waitForQualityGate()
-      if (qualitygate.status != "OK") {
-         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-
-         timeout(time:5, unit: 'MINUTES')
-      {
-        waitForQualityGate abortPipeline:true
-      }
-
-      }
-
-      else{
-        out.info(this,"Scanning done")
-      }
-
-      
-     
-    } 
-
   }
-
+   def qualitygate = waitForQualityGate()
+     if (qualitygate.status != "OK") {
+        error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+     }
+     else{
+       sh "echo PASSED"
+     }
+    }
 
  /* stage ("SonarQube analysis") {
      
