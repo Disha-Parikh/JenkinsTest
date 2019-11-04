@@ -21,11 +21,7 @@ node{
 	                	sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=Jenkins  -Dsonar.sources=."
            }
 
-  }
-
-
-  stage ("SonarQube analysis") {
-      withSonarQubeEnv('Scan') {
+            withSonarQubeEnv('Scan') {
          sh "/opt/sonarscanner/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner"   
       }
 
@@ -33,8 +29,14 @@ node{
       if (qualitygate.status != "OK") {
          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       }
+
+  }
+
+
+ /* stage ("SonarQube analysis") {
+     
    
-}
+}*/
 
 	stage('docker build/push'){
 		docker.withRegistry('https://index.docker.io/v1/','Docker'){
