@@ -11,8 +11,7 @@ node{
 			
 		'''	 
 	}
-
-  stage('sonar-scanner') 
+stage('sonar-scanner') 
   {
         def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
@@ -23,23 +22,20 @@ node{
        withSonarQubeEnv('Scan') {
      }
     
-  
+  /*timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+        
+  }*/
    def qualitygate = waitForQualityGate()
      if (qualitygate.status != "OK") {
-
-        waitForQualityGate abortPipeline: true
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+                waitForQualityGate abortPipeline: true
 
-        //timeout(time: 5, unit: 'MINUTES') {
-        //waitForQualityGate abortPipeline: true
-        
-  //}
      }
      else{
        sh "echo PASSED"
      }
     }
-
  /* stage ("SonarQube analysis") {
      
    
