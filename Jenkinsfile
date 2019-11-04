@@ -23,13 +23,15 @@ node{
        withSonarQubeEnv('Scan') {
      }
     
-  timeout(time: 5, unit: 'MINUTES') {
-        waitForQualityGate abortPipeline: true
-        
-  }
+  
    def qualitygate = waitForQualityGate()
      if (qualitygate.status != "OK") {
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+
+        timeout(time: 5, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+        
+  }
      }
      else{
        sh "echo PASSED"
