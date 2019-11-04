@@ -30,6 +30,11 @@ node{
          error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
       }
 
+      else{
+        out.info(this,"Scanning done")
+      }
+
+
   }
 
 
