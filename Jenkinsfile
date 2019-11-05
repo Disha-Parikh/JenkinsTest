@@ -44,7 +44,7 @@ pipeline{
        withSonarQubeEnv('Scan') {
         }
 
-        timeout(time: 1, unit: 'HOURS'){
+   /*     timeout(time: 1, unit: 'HOURS'){
         qualitygate = waitForQualityGate()
 
         if(qualitygate.status != "OK") {
@@ -54,7 +54,7 @@ pipeline{
         else{ 
               sh "echo PASSED"
         }
-      }
+      }*/
     }
   
   }
