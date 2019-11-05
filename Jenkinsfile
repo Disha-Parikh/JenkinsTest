@@ -43,15 +43,18 @@ pipeline{
   
        withSonarQubeEnv('Scan') {
         }
+
+        timeout(time: 10, unit: 'MINUTES'){
         qualitygate = waitForQualityGate()
 
-          if(qualitygate.status != "OK") {
-        error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+        if(qualitygate.status != "OK") {
+              error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 waitForQualityGate abortPipeline: true
-      }
-    else{ 
+        }
+        else{ 
        sh "echo PASSED"
-     }
+        }
+      }
     }
   
   }
@@ -70,17 +73,9 @@ pipeline{
       }  
  
     }
-
-      
-    
-
-
-    }
-
   }
 
-
-
+}
 
 post{
 
