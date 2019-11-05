@@ -78,7 +78,7 @@ stage('sonar-scanner') {
   }
 }
 
-}
+
 
 post{
 
