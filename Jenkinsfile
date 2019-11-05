@@ -32,7 +32,7 @@ stage('sonar-scanner')
                 waitForQualityGate abortPipeline: true
 
      }
-     else{
+     else{ 
        sh "echo PASSED"
      }
     }
@@ -47,4 +47,22 @@ stage('sonar-scanner')
     }
 
 	}
+
+  post{
+
+    always{
+      echo "Post actions running"
+    }
+
+
+    success{
+      echo "SUCCESS"
+    }
+
+    failure{
+
+      echo "FAILURE :("
+    }
+
+  }
 }
