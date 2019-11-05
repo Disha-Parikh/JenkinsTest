@@ -27,7 +27,7 @@ stage('sonar-scanner')
         
   }*/
    def qualitygate = waitForQualityGate()
-     if (qualitygate.status != "OK") {
+     /*if (qualitygate.status != "OK") {
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 waitForQualityGate abortPipeline: true
 
@@ -35,7 +35,7 @@ stage('sonar-scanner')
      else{ 
        sh "echo PASSED"
      }
-    }
+    }*/
  /* stage ("SonarQube analysis") {
      
    
