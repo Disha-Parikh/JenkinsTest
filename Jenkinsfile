@@ -63,12 +63,12 @@ stage('sonar-scanner') {
     }
 
       stage('docker build/push'){
-    steps{
+       steps{
       script{
 
           docker.withRegistry('https://index.docker.io/v1/','Docker'){
       app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
-    }
+        }
       }
     
 
@@ -76,7 +76,7 @@ stage('sonar-scanner') {
     }
 
   }
-
+}
 
 }
 
