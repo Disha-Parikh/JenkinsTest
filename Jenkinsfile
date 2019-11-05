@@ -72,8 +72,8 @@ pipeline{
         }
       }
 
-      sh "docker run -dp 5001:5000 dishaparikh98/finalflask:${commit_id}"  
-      sh "docker ps"
+      sh "docker run -p 5001:5000 dishaparikh98/finalflask:${commit_id}"  
+      
 
  
     }
