@@ -47,6 +47,7 @@ pipeline{
         timeout(time: 10, unit: 'MINUTES'){
         qualitygate = waitForQualityGate()
 
+        echo "ABCD ${qualitygate.status}"
         if(qualitygate.status != "OK") {
               error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 //waitForQualityGate abortPipeline: true
