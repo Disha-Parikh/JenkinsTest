@@ -44,10 +44,9 @@ pipeline{
        withSonarQubeEnv('Scan') {
         }
 
-        timeout(time: 10, unit: 'MINUTES'){
+        timeout(time: 1, unit: 'HOURS'){
         qualitygate = waitForQualityGate()
 
-        echo "ABCD ${qualitygate.status}"
         if(qualitygate.status != "OK") {
               error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 //waitForQualityGate abortPipeline: true
