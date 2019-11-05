@@ -43,39 +43,26 @@ pipeline{
   
        withSonarQubeEnv('Scan') {
         }
+        qualitygate = waitForQualityGate()
     }
-
-
-            def qualitygate = waitForQualityGate()
-     if (qualitygate.status != "OK") {
+    if (qualitygate.status != "OK") {
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 waitForQualityGate abortPipeline: true
-
-     }
-     else{ 
+      }
+    else{ 
        sh "echo PASSED"
      }
-         
-        }
+  }
        
          /*timeout(time: 1, unit: 'MINUTES') {
         waitForQualityGate abortPipeline: true
         
-  }*/
+  }*/}
 
-    
-
-
-       }
-
-        
-
-
-       stage('docker build/push'){
-       steps{
+  stage('docker build/push'){
+    steps{
       script{
-
-          docker.withRegistry('https://index.docker.io/v1/','Docker'){
+      docker.withRegistry('https://index.docker.io/v1/','Docker'){
       app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
         }
       }  
