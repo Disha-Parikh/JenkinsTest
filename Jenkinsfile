@@ -49,7 +49,7 @@ pipeline{
 
         if(qualitygate.status != "OK") {
               error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-                waitForQualityGate abortPipeline: true
+                //waitForQualityGate abortPipeline: true
         }
         else{ 
        sh "echo PASSED"
