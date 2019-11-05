@@ -26,7 +26,7 @@ stage('sonar-scanner')
         waitForQualityGate abortPipeline: true
         
   }*/
-   def qualitygate = waitForQualityGate()
+  // def qualitygate = waitForQualityGate()
      /*if (qualitygate.status != "OK") {
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 waitForQualityGate abortPipeline: true
@@ -36,11 +36,7 @@ stage('sonar-scanner')
        sh "echo PASSED"
      }
     }*/
- /* stage ("SonarQube analysis") {
-     
-   
-}*/
-
+}
 	stage('docker build/push'){
 		docker.withRegistry('https://index.docker.io/v1/','Docker'){
 		def app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
