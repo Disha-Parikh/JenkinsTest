@@ -1,10 +1,14 @@
+def commit_id
+def sonarqubeScannerHome 
+def app
+
 pipeline{
 
   stages{
 	
 	stage('SCM Checkout'){
     steps{
-      def commit_id
+      
       checkout scm
       sh "git rev-parse --short HEAD > .git/commit-id"
       commit_id = readFile('.git/commit-id').trim()
@@ -23,7 +27,7 @@ pipeline{
 	}
 stage('sonar-scanner') {
        steps{
-         def sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+         sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
@@ -54,7 +58,7 @@ stage('sonar-scanner') {
       stage('docker build/push'){
     steps{
       docker.withRegistry('https://index.docker.io/v1/','Docker'){
-    def app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
+      app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
     }
 
 
