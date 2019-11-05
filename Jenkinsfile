@@ -52,7 +52,7 @@ pipeline{
                 //waitForQualityGate abortPipeline: true
         }
         else{ 
-       sh "echo PASSED"
+              sh "echo PASSED"
         }
       }
     }
@@ -70,7 +70,11 @@ pipeline{
       docker.withRegistry('https://index.docker.io/v1/','Docker'){
       app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
         }
-      }  
+      }
+
+      sh "docker run -dp 5001:5000 dishaparikh98/finalflask:${commit_id}"  
+      sh "docker ps"
+
  
     }
   }
