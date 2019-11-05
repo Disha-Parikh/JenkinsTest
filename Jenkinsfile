@@ -1,4 +1,6 @@
-node{
+pipeline{
+
+  stages{
 	def commit_id
 	stage('SCM Checkout'){
 	 checkout scm
@@ -43,6 +45,8 @@ stage('sonar-scanner')
     }
 
 	}
+
+}
 
   post{
 
