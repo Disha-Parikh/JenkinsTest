@@ -4,6 +4,8 @@ def app
 
 pipeline{
 
+  agent any
+
   stages{
 	
 	stage('SCM Checkout'){
@@ -35,6 +37,7 @@ stage('sonar-scanner') {
         }
          
         }
+        step{
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
@@ -42,6 +45,7 @@ stage('sonar-scanner') {
   
        withSonarQubeEnv('Scan') {
         }
+      }
 
          /*timeout(time: 1, unit: 'MINUTES') {
         waitForQualityGate abortPipeline: true
