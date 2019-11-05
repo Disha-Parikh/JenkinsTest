@@ -1,6 +1,7 @@
 def commit_id
 def sonarqubeScannerHome 
 def app
+def qualitygate
 
 pipeline{
 
@@ -29,28 +30,23 @@ pipeline{
     }
 		 	 
 	}
-stage('sonar-scanner') {
-       steps{
-        script{
+  stage('sonar-scanner') {
+    steps{
+      script{
 
           sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 
-             withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
+        withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
         }
   
        withSonarQubeEnv('Scan') {
         }
-        }
-         
-        }
-       
-         /*timeout(time: 1, unit: 'MINUTES') {
-        waitForQualityGate abortPipeline: true
-        
-  }*/
-   def qualitygate = waitForQualityGate()
+    }
+
+
+            def qualitygate = waitForQualityGate()
      if (qualitygate.status != "OK") {
         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
                 waitForQualityGate abortPipeline: true
@@ -59,9 +55,20 @@ stage('sonar-scanner') {
      else{ 
        sh "echo PASSED"
      }
-    }
+         
+        }
+       
+         /*timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+        
+  }*/
 
-       } 
+    
+
+
+       }
+
+        
 
 
        stage('docker build/push'){
