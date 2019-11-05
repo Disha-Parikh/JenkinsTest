@@ -34,17 +34,19 @@ stage('sonar-scanner') {
         script{
 
           sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        }
-         
-        }
-        steps{
-        withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
+
+             withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
           sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
         }
   
        withSonarQubeEnv('Scan') {
         }
+        }
+         
+        }
+        steps{
+     
       }
 
          /*timeout(time: 1, unit: 'MINUTES') {
@@ -62,18 +64,21 @@ stage('sonar-scanner') {
      }
     }*/
 
-       }   
- 
-    }
+       } 
 
-      stage('docker build/push'){
+
+       stage('docker build/push'){
        steps{
       script{
 
           docker.withRegistry('https://index.docker.io/v1/','Docker'){
       app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
         }
-      }
+      }  
+ 
+    }
+
+      
     
 
 
