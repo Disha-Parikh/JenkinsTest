@@ -88,8 +88,8 @@ post{
         }
 
         
-        sh "docker-comose up -d"
-        sh "docker-comose "
+        sh "docker-compose up -d"
+        sh "docker-compose ps "
       }
     }
 
