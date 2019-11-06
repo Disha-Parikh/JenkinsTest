@@ -72,7 +72,7 @@ pipeline{
         }
       }
 
-      sh "docker run -p 5002:5000 -net=host dishaparikh98/finalflask:${commit_id}"  
+      sh "docker run -p 5002:5000 --net=host  dishaparikh98/finalflask:${commit_id}"  
       
 
  
