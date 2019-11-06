@@ -64,13 +64,9 @@ pipeline{
         
   }*/}
 
-  stage('docker build/push'){
+ /* stage('docker build/push'){
     steps{
-      script{
-      docker.withRegistry('https://index.docker.io/v1/','Docker'){
-      app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
-        }
-      }
+     
 
       sh "docker run -p 5002:5000 --net=host  dishaparikh98/finalflask:${commit_id}"  
       
@@ -78,13 +74,23 @@ pipeline{
  
     }
   }
-
+*/
 }
 
 post{
 
     always{
       echo "Post actions running"
+
+       script{
+      docker.withRegistry('https://index.docker.io/v1/','Docker'){
+      app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
+        }
+
+        sh "docker-compose build ."
+        sh "docker-comose up -d"
+        sh "docker-comose "
+      }
     }
 
 

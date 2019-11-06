@@ -4,10 +4,10 @@ services:
     network_mode: host
     build: .
     ports:
-      - "5000:5000"
+      - "5002:5000"
     depends_on:
       - db
   db:
     image: postgres:latest
     ports:
-      - "15432:5432"
+      - "5432:5432"
