@@ -87,7 +87,7 @@ post{
       app = docker.build("dishaparikh98/finalflask:${commit_id}", '.').push()
         }
 
-        sh "docker-compose build ."
+        
         sh "docker-comose up -d"
         sh "docker-comose "
       }
