@@ -105,10 +105,10 @@ def delete(id):
 	return render_template('fetch.html',data=result)
 
 if __name__ == '__main__':
-	#app = create_app("config")
+	
 	app.run(host='0.0.0.0',port=5002)
 	cur.execute(create_database)
 
 	
 
-	
+#app = create_app("config")
