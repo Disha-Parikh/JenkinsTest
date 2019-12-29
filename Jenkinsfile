@@ -35,6 +35,7 @@ pipeline{
       script{
 
           sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+          sh "echo Line 38 JenkinsFile"
 
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
