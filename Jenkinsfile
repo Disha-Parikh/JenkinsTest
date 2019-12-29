@@ -64,17 +64,7 @@ pipeline{
         
   }*/}
 
- /* stage('docker build/push'){
-    steps{
-     
 
-      sh "docker run -p 5002:5000 --net=host  dishaparikh98/finalflask:${commit_id}"  
-      
-
- 
-    }
-  }
-*/
 }
 
 post{
