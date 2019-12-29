@@ -38,7 +38,7 @@ pipeline{
 
         withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
         {
-          sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=jenkins:flaskjenkins -Dsonar.sources=. "
+          sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
         }
   
        withSonarQubeEnv('Scan') {
