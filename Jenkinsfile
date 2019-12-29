@@ -68,6 +68,8 @@ pipeline{
 post{
 
     always{
+
+      echo "ALWAYS"
  
     }
 
