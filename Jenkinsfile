@@ -24,7 +24,7 @@ pipeline{
     steps{
 
       sh '''
-      pip3 install -r requirements.txt
+      sudo pip3 install -r requirements.txt
       
     '''
     }
@@ -68,7 +68,13 @@ pipeline{
 post{
 
     always{
-      echo "Post actions running"
+ 
+    }
+
+
+    success{
+      echo "SUCCESS"
+           echo "Post actions running"
 
        script{
       docker.withRegistry('https://index.docker.io/v1/','Docker'){
@@ -81,14 +87,9 @@ post{
       }
     }
 
-
-    success{
-      echo "SUCCESS"
-    }
-
     failure{
 
-      echo "FAILURE "
+      echo "FAILURE!!"
     }
 
   }
