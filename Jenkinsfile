@@ -30,37 +30,7 @@ pipeline{
     }
 		 	 
 	}
-  stage('sonar-scanner') {
-    steps{
-      script{
 
-          sonarqubeScannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-          sh "echo Line 38 JenkinsFile!"
-
-        withCredentials([string(credentialsId: 'Sonarqube', variable: 'sonarLogin')]) 
-        {
-          sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=admin -Dsonar.sources=. "
-        }
-  
-       withSonarQubeEnv('Scan') {
-        }
-
-        timeout(time: 5, unit: 'MINUTES'){
-        qualitygate = waitForQualityGate()
-
-        if(qualitygate.status != "OK") {
-              error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-                waitForQualityGate abortPipeline: true
-        }
-        else{ 
-              sh "echo PASSED"
-        }
-      }
-    }
-  
-  }
-       
-}
 
 
 }
