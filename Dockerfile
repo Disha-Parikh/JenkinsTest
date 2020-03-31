@@ -4,7 +4,9 @@ RUN apt-get install -y python3-dev python3-pip
 RUN apt-get install -y libffi6
 RUN apt-get install -y libffi-dev
 RUN apt-get install -y build-essential
-RUN pip install flask flask_sqlalchemy psycopg2-binary
+RUN apt-get install -y virtualenv
+RUN pip install flask flask_sqlalchemy psycopg2-binary virtualenv gunicorn
+RUN source mypython/bin/activate
 WORKDIR .
 COPY . .
 EXPOSE 5002
