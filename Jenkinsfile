@@ -91,7 +91,7 @@ post{
 
     failure{
 
-      echo "FAILURE!!"
+      echo "FAILURE!"
     }
 
   }
