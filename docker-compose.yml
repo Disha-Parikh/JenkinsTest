@@ -5,9 +5,9 @@ services:
     build: .
     ports:
       - "5002:5002"
-    depends_on:
-      - db
-  db:
+    links:
+      - postgres
+  postgres:
     image: postgres
     environment:
       POSTGRES_USER: 'postgres'
