@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -79,4 +80,6 @@ def delete(id):
 	return render_template('fetch.html',data=result)
 
 if __name__ == '__main__':
-	app.run(port=5002)
+	h = os.system('curl http://169.254.169.254/latest/meta-data/public-ipv4')
+	app.run(host=h,port=5002)
+
