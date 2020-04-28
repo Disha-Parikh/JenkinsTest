@@ -1,7 +1,7 @@
 version: "2"
 services:
   web:
-    network_mode: host
+    network_mode: bridge
     build: .
     ports:
       - "5002:5002"
