@@ -1,12 +1,5 @@
 version: "2"
 services:
-  web:
-    network_mode: bridge
-    build: .
-    ports:
-      - "5002:5002"
-    depends_on:
-      - postgres
   postgres:
     network_mode: bridge
     image: postgres
@@ -16,3 +9,11 @@ services:
       PGDATA: /data/postgres
     ports:
       - "5432:5432"
+  web:
+    network_mode: bridge
+    build: .
+    ports:
+      - "5002:5002"
+    depends_on:
+      - postgres
+  
