@@ -7,7 +7,7 @@ services:
       - "5002:5002"
     depends_on:
       - postgres
-   postgres:
+  postgres:
     network_mode: host
     image: postgres
     environment:
