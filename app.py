@@ -20,7 +20,7 @@ use_database = 'use Example;'
 create_table = 'create table IF NOT EXISTS User1(id integer PRIMARY KEY,name varchar(32) NOT NULL,email varchar(32) NOT NULL,status varchar(32) NOT NULL)'
 insert_record = 'insert into User1(id, name, email, status) VALUES(%s,%s,%s,%s)'
 
-conn = psycopg2.connect("dbname='postgres' user='postgres' host='0.0.0.0' port=5432 password='einfochips'")
+conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' port=5432 password='einfochips'")
 cur=conn.cursor()
 dirpath = os.getcwd()
 print("PATH????? %s",dirpath)
@@ -80,8 +80,5 @@ def delete(id):
 	return render_template('fetch.html',data=result)
 
 if __name__ == '__main__':
-	h = os.system('curl http://169.254.169.254/latest/meta-data/public-ipv4')
-	print("H")
-	print(h)
-	app.run(host=h,port=5002)
+	app.run(host="0.0.0.0",port=5002)
 
